@@ -1,0 +1,7 @@
+## TODOs & Wishlist ##
+
+Future Improvements.
+
+> General:
+    > Add unit tests
+    > Add some CSS.

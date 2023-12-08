@@ -1,0 +1,121 @@
+<odoo>
+<record id="jap_create_invoice_selected_sale_lines_wizard_view" model="ir.ui.view">
+    <field name="name">jap.create.invoice.selected.sale.lines.wizard.form</field>
+    <field name="model">jap.create.invoice.selected.sale.lines.wizard</field>
+    <field name="arch" type="xml">
+        <form string="Create Invoice from Selected Lines">
+            <script>
+                $(document).ready(function(){
+                    $('.modal-dialog').css({'width': '90%', 'height': '90%'});
+                    $('.modal-content').css({'height': '100%'});
+                    $('.modal-body').css({'height': '100%'});
+                });
+            </script>
+            <p name="wizard_description"
+               style="color:rgb(88,88,107);font-size:12px;font-style:italic;margin-bottom:0px">
+                This wizard allows to invoice only the selected sale lines.
+                Lines totally invoiced do not appear here. <br/>
+                Also, it allows to add an internal note to the invoice and attachments.<br/> <br/>
+            </p>
+            <group name="container_group" col="12" colspan="2">
+                <group name="container_top_group" col="12" colspan="12">
+                    <group name="container_top_left_group" colspan="2">
+                        <field name="sale_id" readonly="1" options="{'no_open': True}"/>
+                    </group>
+                    <group name="container_top_middle_group" colspan="6">
+                        <field name="partner_id" readonly="1" options="{'no_open': True}"/>
+                    </group>
+                    <group name="container_top_right_group" colspan="4">
+                        <field name="date_order" readonly="1"/>
+                    </group>
+                </group>
+            </group>
+
+            <hr/>
+            <group name="container_buttons_group" col="12" colspan="12">
+                <group name="container_buttons_left_group" colspan="3">
+                    <button string="Move All lines To Invoice" name="set_all_lines_to_invoice" type="object"
+                            colspan="3"
+                            default_focus="0"/>
+                </group>
+                <group name="container_buttons_middle_group" colspan="3">
+                    <button string="Move All lines To NOT Invoice"
+                            name="set_all_lines_to_not_invoice" type="object"
+                            colspan="3"
+                            default_focus="0"/>
+                </group>
+                <group name="container_buttons_right_group" colspan="6">
+                </group>
+            </group>
+
+            <field name="line_ids_all_ids" widget="many2many" nolabel="1" colspan="4" invisible="1"/>
+
+            <separator string="Order Lines To Invoice" colspan="4" style="color:#0c0cd3"/>
+            <field name="line_ids_sel_ids" widget="many2many" nolabel="1" colspan="4"
+                   domain="[('order_id', '=', 0)]">
+                <tree create="0" delete="1" editable="0" string="Lines to Invoice">
+                    <field name="jap_created_by_copy" readonly="1" invisible="1"/>
+                    <!--Button Created by Duplication-->
+                    <button string="" name="action_jap_do_nothing" type="object"
+                            attrs="{'invisible':[('jap_created_by_copy', '=', False)]}"
+                            class="btn-link" icon="fa-adn">
+                    </button>
+                    <field name="product_id" readonly="1"
+                           options="{'no_open': True}"/>
+                    <field name="name" readonly="1"/>
+                    <field name="product_uom_qty" readonly="1"/>
+                    <field name="qty_to_invoice" readonly="1"/>
+                    <field name="currency_id" readonly="1"
+                           options="{'no_open': True}"/>
+                    <field name="price_unit" readonly="1"/>
+                    <field name="discount" readonly="1"/>
+                    <field name="price_subtotal" readonly="1"/>
+                </tree>
+            </field>
+
+            <separator string="Do Not Invoice" colspan="4" style="color:#df0808"/>
+            <field name="line_ids_not_sel_ids" widget="many2many" nolabel="1" colspan="4"
+                   domain="[('order_id', '=', 0)]">
+                <tree create="0" delete="1" editable="0" string="Lines to Not Invoice">
+                    <field name="jap_created_by_copy" readonly="1" invisible="1"/>
+                    <!--Button Created by Duplication-->
+                    <button string="" name="action_jap_do_nothing" type="object"
+                            attrs="{'invisible':[('jap_created_by_copy', '=', False)]}"
+                            class="btn-link" icon="fa-adn">
+                    </button>
+                    <field name="product_id" readonly="1"
+                           options="{'no_open': True}"/>
+                    <field name="name" readonly="1"/>
+                    <field name="product_uom_qty" readonly="1"/>
+                    <field name="qty_to_invoice" readonly="1"/>
+                    <field name="currency_id" readonly="1"
+                           options="{'no_open': True}"/>
+                    <field name="price_unit" readonly="1"/>
+                    <field name="discount" readonly="1"/>
+                    <field name="price_subtotal" readonly="1"/>
+                </tree>
+            </field>
+
+            <separator string="Other" colspan="4" style="color:#11111e"/>
+            <group name="">
+                <field name="invoice_note"/>
+            </group>
+
+            <footer>
+                <button string="Create Invoice" name="create_invoice" type="object"
+                        default_focus="1" class="btn-primary"
+                        confirm="Are you sure you want to create an invoice from the selected lines?"/>
+                <button string="Cancel" class="btn-default" special="cancel"/>
+            </footer>
+        </form>
+    </field>
+</record>
+
+<record id="action_jap_create_invoice_selected_sale_lines_wizard" model="ir.actions.act_window">
+    <field name="name">Create Invoice from Selected Lines</field>
+    <field name="res_model">jap.create.invoice.selected.sale.lines.wizard</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+    <field name="view_id" ref="jap_create_invoice_selected_sale_lines_wizard_view"/>
+</record>
+</odoo>

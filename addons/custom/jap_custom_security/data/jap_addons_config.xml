@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data noupdate="1">
+    <record id="jap_addons_config.jap_addons_config_main" model="jap.addons.config">
+        <field name="warning_msg_security_restriction">The requested operation cannot be completed due to Jap Security Restrictions.</field>
+    </record>
+</data>
+</odoo>

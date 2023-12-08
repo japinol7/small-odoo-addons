@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data noupdate="1">
+    <record id="jap_addons_config_main" model="jap.addons.config">
+        <field name="name">Jap Addons Main Configuration</field>
+        <field name="description">Jap addons main configuration</field>
+    </record>
+</data>
+</odoo>

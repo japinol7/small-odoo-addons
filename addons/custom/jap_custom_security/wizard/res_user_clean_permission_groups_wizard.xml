@@ -1,0 +1,43 @@
+<odoo>
+<record id="jap_res_users_clean_permission_groups_wizard_view" model="ir.ui.view">
+    <field name="name">jap.res.users.clean.permission.groups.wizard.form</field>
+    <field name="model">jap.res.users.clean.permission.groups.wizard</field>
+    <field name="arch" type="xml">
+        <form string="Clean User Permission Groups">
+            <p name="wizard_description"
+               style="color:#797979;font-style:italic;font-size:13px;margin-bottom:0px">
+               This wizard allows to clean a user permission groups.<br/>
+            </p>
+            <p name="wizard_warning" style="color:#667789;font-style:italic;font-size:12px">
+                Once cleaned the permission groups for the user
+                make sure than you activate the required roles for them.<br/>
+            </p>
+            <field name="user_id" invisible="1" readonly="1"/>
+            <group name="container_group" col="6" colspan="2">
+                <group colspan="4">
+                    <field name="user_name"/>
+                    <field name="user_login"/>
+                </group>
+                <group colspan="2">
+                </group>
+            </group>
+            <footer>
+                <button string="Clean Permission Groups"
+                        name="clean_user_permission_groups_confirm"
+                        type="object" default_focus="1" class="btn-primary"
+                        confirm="Are you sure you want to clean this user's permission groups?"/>
+                <button string="Cancel" class="btn-default" special="cancel"/>
+            </footer>
+        </form>
+    </field>
+</record>
+
+
+<record id="action_jap_res_users_clean_permission_groups_wizard" model="ir.actions.act_window">
+    <field name="name">Clean User Permission Groups</field>
+    <field name="res_model">jap.res.users.clean.permission.groups.wizard</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+    <field name="view_id" ref="jap_res_users_clean_permission_groups_wizard_view"/>
+</record>
+</odoo>

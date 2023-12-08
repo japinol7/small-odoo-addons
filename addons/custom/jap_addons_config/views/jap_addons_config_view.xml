@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<record id="jap_addons_config_tree_view" model="ir.ui.view">
+    <field name="name">jap.addons.config.tree</field>
+    <field name="model">jap.addons.config</field>
+    <field name="arch" type="xml">
+        <tree string="Addons Config">
+            <field name="name" required="1" readonly="1"/>
+            <field name="active"/>
+        </tree>
+    </field>
+</record>
+
+<record id="jap_addons_config_form_view" model="ir.ui.view">
+    <field name="name">jap.addons.config.form</field>
+    <field name="model">jap.addons.config</field>
+    <field name="arch" type="xml">
+        <form string="Jap Addons Config">
+            <group col="3">
+                <group name="top_left">
+                    <field name="name" required="1"/>
+                    <field name="description"/>
+                </group>
+                <group name="top_center">
+                </group>
+                <group name="top_right">
+                    <field name="active" widget="boolean_toggle" readonly="1"/>
+                </group>
+                <group name="bottom" colspan="3">
+                </group>
+            </group>
+
+            <notebook>
+                <page string="Notes" name="notes">
+                    <group name="group1">
+                        <field name="note"/>
+                    </group>
+                </page>
+            </notebook>
+        </form>
+    </field>
+</record>
+</odoo>

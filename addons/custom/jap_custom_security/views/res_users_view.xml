@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<record id="view_users_form" model="ir.ui.view">
+    <field name="name">res.users.form.security.jap</field>
+    <field name="model">res.users</field>
+    <field name="type">form</field>
+    <field name="inherit_id" ref="base.view_users_form"/>
+    <field name="arch" type="xml">
+        <xpath expr="//header" position="inside">
+            <button name="action_jap_res_users_clean_permission_groups" type="object"
+                    string="Clean User Permission Groups"
+                    icon="fa-list"
+                    groups="base.group_system,base.group_erp_manager"
+                    help="Clean this user permission groups.">
+            </button>
+        </xpath>
+    </field>
+</record>
+</odoo>

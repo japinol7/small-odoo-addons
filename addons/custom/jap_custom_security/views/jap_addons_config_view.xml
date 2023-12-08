@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<record id="jap_addons_config_form_view" model="ir.ui.view">
+    <field name="name">jap.addons.config.form.security.jap</field>
+    <field name="model">jap.addons.config</field>
+    <field name="inherit_id" ref="jap_addons_config.jap_addons_config_form_view"/>
+    <field name="arch" type="xml">
+        <xpath expr="//page[@name='notes']" position="after">
+                <page string="Security config" name="security_config">
+                    <separator string="Security Warning messages" colspan="4" style="color:#3b3b9b"/>
+                    <group name="group1">
+                        <field name="warning_msg_security_restriction"
+                               string="Msg restriction"/>
+                    </group>
+                </page>
+        </xpath>
+    </field>
+</record>
+</odoo>

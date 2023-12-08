@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data noupdate="0">
+    <!-- Groups Category -->
+    <record model="ir.module.category" id="module_category_jap_sale">
+        <field name="name">Jap Sale</field>
+        <field name="sequence">2</field>
+    </record>
+
+    <!-- Sale -->
+    <record id="group_sale_confirming" model="res.groups">
+        <field name="name">Sale Confirming</field>
+        <field name="category_id" ref="jap_custom_security.module_category_jap_sale"/>
+    </record>
+
+    <record id="group_sale_copy_lines" model="res.groups">
+        <field name="name">Sale Duplicate Lines</field>
+        <field name="category_id" ref="jap_custom_security.module_category_jap_sale"/>
+    </record>
+</data>
+</odoo>

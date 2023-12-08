@@ -1,0 +1,4 @@
+odoo_base_repo_updated
+2023-10-31
+
+Stable release 16.0

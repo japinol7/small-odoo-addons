@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<record id="view_order_form" model="ir.ui.view">
+    <field name="name">sale.order.form.jap</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_order_form"/>
+    <field name="arch" type="xml">
+        <button name="action_draft" position="after">
+            <button name="action_jap_create_invoice_from_selected_lines" type="object"
+                    string="Create Invoice From Lines"
+                    icon="fa-list-ul"
+                    attrs="{'invisible':[('state', 'not in', ['sale', 'done'])]}"
+                    help="Create draft Invoice.">
+            </button>
+        </button>
+        <xpath expr="//field[@name='order_line']/tree//field[@name='product_id']" position="before">
+            <field name="jap_created_by_copy" readonly="1" invisible="1"/>
+            <!--Button Created by Duplication-->
+            <button string="" name="action_jap_do_nothing" type="object"
+                    nolabel="1"
+                    attrs="{'invisible':[('jap_created_by_copy', '=', False)]}"
+                    class="btn-link" icon="fa-adn"
+                    help="Created by Duplication.">
+            </button>
+            <!--Button Duplicate line-->
+            <button string="" name="action_jap_copy_sale_order_line" type="object"
+                    class="btn-link" icon="fa-copy"
+                    attrs="{'invisible':['|',
+                                         ('parent.invoice_status', '=', 'invoiced'),
+                                         ('parent.state','=','cancel'),
+                                         ]}"
+                    help="Duplicate line."
+                    confirm="Are you sure you want to duplicate this line?">
+            </button>
+        </xpath>
+    </field>
+</record>
+</odoo>
