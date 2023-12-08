@@ -3,5 +3,6 @@
 Future Improvements.
 
 > General:
-    > Add unit tests
+    > Add unit tests.
+    > Add translation mechanisms.
     > Add some CSS.
