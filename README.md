@@ -10,6 +10,12 @@
 	author_twitter: @japinol
 	python: 3.12
 	PostgreSQL v. tested: 16.4
+<br /> <br />
+
+## Older versions
+
+    You can find these addons for Odoo 16.0 in the branch: 16.0.
+<br /> <br />
 
 
 ## Odoo new addon: JAP Sales
