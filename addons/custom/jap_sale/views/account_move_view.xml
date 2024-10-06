@@ -9,7 +9,7 @@
             <field name="jap_sale_line_created_by_copy" readonly="1" invisible="1"/>
             <!--Button Related Sale Line Created by Duplication-->
             <button string="" name="action_jap_do_nothing" type="object"
-                    attrs="{'invisible':[('jap_sale_line_created_by_copy', '=', False)]}"
+                    invisible="not jap_sale_line_created_by_copy"
                     class="btn-link" icon="fa-adn"
                     help="Related Sale Line Created by Duplication.">
             </button>
