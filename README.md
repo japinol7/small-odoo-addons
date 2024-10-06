@@ -14,7 +14,7 @@
 
 ## Older versions
 
-    You can find these addons for Odoo 16.0 in the branch: 16.0.
+    You can find these addons for Odoo 16.0 in the release: v16.0.1.0.
 <br /> <br />
 
 
