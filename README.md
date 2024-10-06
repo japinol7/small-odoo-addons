@@ -1,15 +1,20 @@
 ## Odoo addons Examples. 
 
 	Small addons examples of Python programming with the Odoo ERP framework.
-    You will need to install Odoo 16.0 to use these examples.
+    You will need to install Odoo 17.0 to use these examples.
 
-	version: 16.0.1.0.0
+	version: 17.0.1.0.0
 	author: Joan A. Pinol
 	author_nickname: japinol
 	author_gitHub: japinol7
 	author_twitter: @japinol
 	python: 3.12
 	PostgreSQL v. tested: 16.4
+
+
+## Older versions
+
+    You can find these addons for Odoo 16.0 in the release: v16.0.1.0.
 
 
 ## Odoo new addon: JAP Sales

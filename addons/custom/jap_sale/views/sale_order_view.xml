@@ -9,7 +9,7 @@
             <button name="action_jap_create_invoice_from_selected_lines" type="object"
                     string="Create Invoice From Lines"
                     icon="fa-list-ul"
-                    attrs="{'invisible':[('state', 'not in', ['sale', 'done'])]}"
+                    invisible="state not in ('sale', 'done')"
                     help="Create draft Invoice.">
             </button>
         </button>
@@ -19,16 +19,14 @@
             <button string="" name="action_jap_do_nothing" type="object"
                     nolabel="1"
                     attrs="{'invisible':[('jap_created_by_copy', '=', False)]}"
+                    invisible="not jap_created_by_copy"
                     class="btn-link" icon="fa-adn"
                     help="Created by Duplication.">
             </button>
             <!--Button Duplicate line-->
             <button string="" name="action_jap_copy_sale_order_line" type="object"
                     class="btn-link" icon="fa-copy"
-                    attrs="{'invisible':['|',
-                                         ('parent.invoice_status', '=', 'invoiced'),
-                                         ('parent.state','=','cancel'),
-                                         ]}"
+                    invisible="parent.invoice_status == 'invoiced' or parent.state == 'cancel'"
                     help="Duplicate line."
                     confirm="Are you sure you want to duplicate this line?">
             </button>
