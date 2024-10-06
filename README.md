@@ -8,6 +8,8 @@
 	author_nickname: japinol
 	author_gitHub: japinol7
 	author_twitter: @japinol
+	python: 3.12
+	PostgreSQL v. tested: 16.4
 
 
 ## Odoo new addon: JAP Sales
