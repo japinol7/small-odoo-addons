@@ -54,10 +54,10 @@
             <field name="line_ids_sel_ids" widget="many2many" nolabel="1" colspan="4"
                    domain="[('order_id', '=', 0)]">
                 <tree create="0" delete="1" editable="0" string="Lines to Invoice">
-                    <field name="jap_created_by_copy" readonly="1" invisible="1"/>
+                    <field name="jap_created_by_copy" readonly="1" invisible="1" column_invisible="1"/>
                     <!--Button Created by Duplication-->
                     <button string="" name="action_jap_do_nothing" type="object"
-                            attrs="{'invisible':[('jap_created_by_copy', '=', False)]}"
+                            invisible="not jap_created_by_copy"
                             class="btn-link" icon="fa-adn">
                     </button>
                     <field name="product_id" readonly="1"
@@ -77,10 +77,10 @@
             <field name="line_ids_not_sel_ids" widget="many2many" nolabel="1" colspan="4"
                    domain="[('order_id', '=', 0)]">
                 <tree create="0" delete="1" editable="0" string="Lines to Not Invoice">
-                    <field name="jap_created_by_copy" readonly="1" invisible="1"/>
+                    <field name="jap_created_by_copy" readonly="1" invisible="1" column_invisible="1"/>
                     <!--Button Created by Duplication-->
                     <button string="" name="action_jap_do_nothing" type="object"
-                            attrs="{'invisible':[('jap_created_by_copy', '=', False)]}"
+                            invisible="not jap_created_by_copy"
                             class="btn-link" icon="fa-adn">
                     </button>
                     <field name="product_id" readonly="1"
