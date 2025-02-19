@@ -4,10 +4,10 @@
     <field name="name">jap.addons.config.tree</field>
     <field name="model">jap.addons.config</field>
     <field name="arch" type="xml">
-        <tree string="Addons Config">
+        <list string="Addons Config">
             <field name="name" required="1" readonly="1"/>
             <field name="active"/>
-        </tree>
+        </list>
     </field>
 </record>
 

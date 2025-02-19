@@ -32,7 +32,7 @@
 
 
 # Addons path
-addons_path=/home/japinol/dev/odoo/base/odoo/addons,/home/japinol/.local/share/Odoo/addons/18.0,/home/japinol/dev/odoo/base/addons,/home/japinol/dev/odoo/small-odoo-addons/addons/custom
+addons_path=/home/japinol/dev/odoo/base/odoo/addons,/home/japinol/dev/odoo/base/addons,/home/japinol/dev/odoo/small-odoo-addons/addons/custom,/home/japinol/dev/odoo/addons/common
 
 
 #HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH

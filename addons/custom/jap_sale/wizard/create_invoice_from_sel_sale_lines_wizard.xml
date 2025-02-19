@@ -4,13 +4,6 @@
     <field name="model">jap.create.invoice.selected.sale.lines.wizard</field>
     <field name="arch" type="xml">
         <form string="Create Invoice from Selected Lines">
-            <script>
-                $(document).ready(function(){
-                    $('.modal-dialog').css({'width': '90%', 'height': '90%'});
-                    $('.modal-content').css({'height': '100%'});
-                    $('.modal-body').css({'height': '100%'});
-                });
-            </script>
             <p name="wizard_description"
                style="color:rgb(88,88,107);font-size:12px;font-style:italic;margin-bottom:0px">
                 This wizard allows to invoice only the selected sale lines.
@@ -53,7 +46,7 @@
             <separator string="Order Lines To Invoice" colspan="4" style="color:#0c0cd3"/>
             <field name="line_ids_sel_ids" widget="many2many" nolabel="1" colspan="4"
                    domain="[('order_id', '=', 0)]">
-                <tree create="0" delete="1" editable="0" string="Lines to Invoice">
+                <list create="0" delete="1" editable="bottom" string="Lines to Invoice">
                     <field name="jap_created_by_copy" readonly="1" invisible="1" column_invisible="1"/>
                     <!--Button Created by Duplication-->
                     <button string="" name="action_jap_do_nothing" type="object"
@@ -70,13 +63,13 @@
                     <field name="price_unit" readonly="1"/>
                     <field name="discount" readonly="1"/>
                     <field name="price_subtotal" readonly="1"/>
-                </tree>
+                </list>
             </field>
 
             <separator string="Do Not Invoice" colspan="4" style="color:#df0808"/>
             <field name="line_ids_not_sel_ids" widget="many2many" nolabel="1" colspan="4"
                    domain="[('order_id', '=', 0)]">
-                <tree create="0" delete="1" editable="0" string="Lines to Not Invoice">
+                <list create="0" delete="1" editable="bottom" string="Lines to Not Invoice">
                     <field name="jap_created_by_copy" readonly="1" invisible="1" column_invisible="1"/>
                     <!--Button Created by Duplication-->
                     <button string="" name="action_jap_do_nothing" type="object"
@@ -93,7 +86,7 @@
                     <field name="price_unit" readonly="1"/>
                     <field name="discount" readonly="1"/>
                     <field name="price_subtotal" readonly="1"/>
-                </tree>
+                </list>
             </field>
 
             <separator string="Other" colspan="4" style="color:#11111e"/>
