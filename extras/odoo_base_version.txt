@@ -1,4 +1,4 @@
 odoo_base_repo_updated
-2024-10-06
+2025-02-19
 
-Stable release 17.0
+Stable release 18.0

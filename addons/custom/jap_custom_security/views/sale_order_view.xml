@@ -8,7 +8,7 @@
         <button name="action_jap_create_invoice_from_selected_lines" position="attributes">
             <attribute name="groups">jap_custom_security.jap_group_sale_squad</attribute>
         </button>
-        <xpath expr="//field[@name='order_line']/tree//button[@name='action_jap_copy_sale_order_line']"
+        <xpath expr="//field[@name='order_line']/list//button[@name='action_jap_copy_sale_order_line']"
                position="attributes">
             <attribute name="groups">jap_custom_security.group_sale_copy_lines</attribute>
         </xpath>

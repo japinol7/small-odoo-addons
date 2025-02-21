@@ -3,7 +3,7 @@
 {
     'name': 'JAP Addons Config',
     'summary': "Configuration options for Jap addons",
-    'version': '17.0.1.0.0',
+    'version': '18.0.1.0.0',
     'description': "Configuration options for Jap addons",
     'author': 'japinol',
     'company': 'japinol',
