@@ -9,7 +9,7 @@
 	author_gitHub: japinol7
 	author_twitter: @japinol
 	python: 3.12
-	PostgreSQL v. tested: 17.3
+	PostgreSQL v. tested: 17.4
 
 
 ## Older versions
