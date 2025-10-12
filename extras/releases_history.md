@@ -1,5 +1,16 @@
 # Release History
 
+## v18.1.0.0
+
+### Features upgraded to Odoo 18
+
+* Add an addon to customize JAP addons version.
+    * jap_customize_version.
+
+* Some minor improvements.
+
+<br>
+
 ## v18.0.1.0
 
 ### Features upgraded to Odoo 18

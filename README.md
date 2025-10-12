@@ -4,18 +4,19 @@
     You will need to install Odoo 18.0 to use these examples.
 
 	version: 18.0.1.0.0
+    release: v18.1.0.0
 	author: Joan A. Pinol
 	author_nickname: japinol
 	author_gitHub: japinol7
 	author_twitter: @japinol
-	python: 3.12
+	Python: 3.12
 	PostgreSQL v. tested: 17.4
 
 
 ## Older versions
 
-    You can find these addons for Odoo 17.0 in the release: v17.0.1.0.
-    You can find these addons for Odoo 16.0 in the release: v16.0.1.0.
+    You can find these addons for Odoo 17.0 in the release: v17.0.1.0
+    You can find these addons for Odoo 16.0 in the release: v16.0.1.0
 
 
 ## Odoo new addon: JAP Sales
@@ -46,9 +47,16 @@ Icon mark to show which lines are duplicated with this feature <br />
 
 ### How it works
 
-Install (Activate) this addon module: JAP Sales. <br />
-Note: The following addon modules will be automatically installed:  <br />
-JAP Addons Config, JAP Security. <br />  <br />
+Install (Activate) this addon modules: 
+* JAP Sales
+* JAP Customize Version
+<br />
+
+Note: The following addon modules will be automatically installed:
+* JAP Addons Config
+* JAP Security
+<br />
+
 <img src="screenshots/screenshot1.png" width="980"> <br /> <br />
 
 Activate the 'Role Sales Squad' role for the chosen users <br /> <br />
