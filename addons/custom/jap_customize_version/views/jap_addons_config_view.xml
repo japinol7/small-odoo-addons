@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<record id="jap_addons_config_list_view" model="ir.ui.view">
+    <field name="name">jap.addons.config.list.jap</field>
+    <field name="model">jap.addons.config</field>
+    <field name="inherit_id" ref="jap_addons_config.jap_addons_config_list_view"/>
+    <field name="arch" type="xml">
+        <field name="name" position="after">
+            <field name="jap_custom_version" class="fw-bold"/>
+        </field>
+    </field>
+</record>
+
+<record id="jap_addons_config_form_view" model="ir.ui.view">
+    <field name="name">jap.addons.config.form.jap</field>
+    <field name="model">jap.addons.config</field>
+    <field name="inherit_id" ref="jap_addons_config.jap_addons_config_form_view"/>
+    <field name="arch" type="xml">
+        <field name="name" position="after">
+            <separator string="Jap Custom Version" colspan="4"/>
+            <field name="jap_custom_version" class="fw-bold"/>
+        </field>
+    </field>
+</record>
+</odoo>
