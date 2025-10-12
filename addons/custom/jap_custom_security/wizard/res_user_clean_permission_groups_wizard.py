@@ -4,7 +4,7 @@ from odoo.exceptions import ValidationError
 
 
 class JapResUsersCleanPermissionGroups(models.TransientModel):
-    """This wizard allows to clean user permission groups."""
+    """This wizard allows cleaning user permission groups."""
 
     _name = "jap.res.users.clean.permission.groups.wizard"
     _description = "Clean User Permission Groups"

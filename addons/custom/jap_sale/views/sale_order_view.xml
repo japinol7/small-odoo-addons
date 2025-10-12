@@ -9,7 +9,7 @@
             <button name="action_jap_create_invoice_from_selected_lines" type="object"
                     string="Create Invoice From Lines"
                     icon="fa-list-ul"
-                    invisible="state not in ('sale', 'done')"
+                    invisible="state != 'sale'"
                     help="Create draft Invoice.">
             </button>
         </button>

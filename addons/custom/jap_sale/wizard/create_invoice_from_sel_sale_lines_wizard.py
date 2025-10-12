@@ -8,10 +8,10 @@ _logger = logging.getLogger(__name__)
 
 
 class JapCreateInvoiceSelectedSaleLinesWizard(models.TransientModel):
-    """This wizard allows to create invoices from only the selected sale lines."""
+    """This wizard allows creating invoices from only the selected sale lines."""
 
     _name = "jap.create.invoice.selected.sale.lines.wizard"
-    _description = "This wizard allows to create invoices from only the selected sale lines."
+    _description = "This wizard allows creating invoices from only the selected sale lines."
 
     def _default_sale_id(self):
         context = self.env.context
@@ -100,7 +100,7 @@ class JapCreateInvoiceSelectedSaleLinesWizard(models.TransientModel):
         self.update({'line_ids_sel_ids': lines.ids})
 
     def _action_do_not_close(self):
-        """Allows to keep the wizard open after executing an action."""
+        """Allows keeping the wizard open after executing an action."""
         return {
             'name': _('Invoice Selected Sale Lines'),
             'type': 'ir.actions.act_window',

@@ -4,7 +4,6 @@
     <field name="name">Jap Addons Configuration</field>
     <field name="res_model">jap.addons.config</field>
     <field name="view_mode">list,form</field>
-    <field name="target">inline</field>
 </record>
 
 <menuitem id="menu_jap_addons_config_main"

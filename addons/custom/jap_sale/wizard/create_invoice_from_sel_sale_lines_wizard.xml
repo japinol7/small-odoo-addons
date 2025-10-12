@@ -6,9 +6,9 @@
         <form string="Create Invoice from Selected Lines">
             <p name="wizard_description"
                style="color:rgb(88,88,107);font-size:12px;font-style:italic;margin-bottom:0px">
-                This wizard allows to invoice only the selected sale lines.
+                This wizard allows invoicing only the selected sale lines.
                 Lines totally invoiced do not appear here. <br/>
-                Also, it allows to add an internal note to the new invoice.<br/> <br/>
+                Also, it allows adding an internal note to the new invoice.<br/> <br/>
             </p>
             <group name="container_group" col="12" colspan="2">
                 <group name="container_top_group" col="12" colspan="12">

@@ -6,7 +6,7 @@
         <form string="Clean User Permission Groups">
             <p name="wizard_description"
                style="color:#797979;font-style:italic;font-size:13px;margin-bottom:0px">
-               This wizard allows to clean a user permission groups.<br/>
+               This wizard allows cleaning user permission groups.<br/>
             </p>
             <p name="wizard_warning" style="color:#667789;font-style:italic;font-size:12px">
                 Once cleaned the permission groups for the user
