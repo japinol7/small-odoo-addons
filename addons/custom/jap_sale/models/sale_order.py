@@ -12,6 +12,23 @@ _logger = logging.getLogger(__name__)
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
+    def _create_invoices(self, grouped=False, final=False, date=None):
+        """Override to set invoice lines as copied if the original sale line
+        was copied with our custom feature.
+        """
+        invoices = super()._create_invoices(grouped=grouped, final=final, date=date)
+
+        if invoices:
+            self._jap_set_invoice_lines_created_from_copied_sale_lines(invoices)
+
+        return invoices
+
+    def _jap_set_invoice_lines_created_from_copied_sale_lines(self, invoices):
+        for move_line in invoices.invoice_line_ids:
+            if any(move_line.sale_line_ids.filtered(
+                    lambda line: line.jap_created_by_copy)):
+                move_line.jap_sale_line_created_by_copy = True
+
     def _get_invoiceable_lines(self, final=False):
         """Only allows invoicing the selected lines if this feature
         is activated in the context.

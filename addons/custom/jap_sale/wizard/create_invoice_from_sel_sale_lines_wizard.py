@@ -82,12 +82,13 @@ class JapCreateInvoiceSelectedSaleLinesWizard(models.TransientModel):
 
     @api.onchange('sale_id')
     def _onchange_sale_id(self):
-        return {'domain': {
-                    'line_ids_all_ids': self._prepare_line_all_domain(),
-                    'line_ids_sel_ids': self._prepare_line_sel_domain(),
-                    'line_ids_not_sel_ids': self._prepare_line_not_sel_domain(),
-                    }
+        return {
+            'domain': {
+                'line_ids_all_ids': self._prepare_line_all_domain(),
+                'line_ids_sel_ids': self._prepare_line_sel_domain(),
+                'line_ids_not_sel_ids': self._prepare_line_not_sel_domain(),
                 }
+            }
 
     @api.onchange('line_ids_sel_ids')
     def _onchange_line_ids_sel_ids(self):
@@ -130,40 +131,34 @@ class JapCreateInvoiceSelectedSaleLinesWizard(models.TransientModel):
         for move in self.env['account.move'].search([('id', 'in', move_ids)]):
             move.jap_invoice_note = self.invoice_note
 
-    def set_invoice_lines_created_from_copied_sale_lines(self, move_ids):
-        account_move_line = self.env['account.move.line']
-        for move_line in account_move_line.search([('move_id', 'in', move_ids)]):
-            if any(move_line.sale_line_ids.filtered(lambda line: line.jap_created_by_copy)):
-                move_line.jap_sale_line_created_by_copy = True
-
     def add_message_to_created_invoice(self, move_ids, sale_order, body_msg):
         for move in self.env['account.move'].search([('id', 'in', move_ids)]):
             move.message_post(body=f"{body_msg}. From Sale: {sale_order.name}")
 
     def create_invoice(self):
         self.ensure_one()
-        msg_prefix = self.env['jap.addons.config'].get_prefix_msg_create_invoice_sel_wiz(self)
+        msg_prefix = self.env[
+            'jap.addons.config'].get_prefix_msg_create_invoice_sel_wiz(self)
         msg_create_invoice = "Create Invoice from Selected Sale Lines."
 
         lines = self.line_ids_sel_ids
         if not lines:
-            raise UserError("There is no order line selected to create an invoice!")
+            raise UserError(
+                "There is no order line selected to create an invoice!")
 
-        self = self.with_context(jap_sale_lines_selected_to_create_invoice=[x.id for x in lines])
+        self = self.with_context(
+            jap_sale_lines_selected_to_create_invoice=[x.id for x in lines])
         orders = self.env['sale.order'].browse(self._context.get('active_ids', []))
         sale_order = orders[0]
 
         _logger.info(f"{msg_prefix} Create invoice for order lines: "
                      f"{[(line.id, line.order_id.name) for line in lines]}")
-
         moves = sale_order._create_invoices(grouped=False, final=False)
         move_ids = [move.id for move in moves]
 
         self.set_invoice_note(move_ids)
-        self.add_message_to_created_invoice(move_ids, sale_order, body_msg=msg_create_invoice)
-
-        if any(lines.filtered(lambda line: line.jap_created_by_copy)):
-            self.set_invoice_lines_created_from_copied_sale_lines(move_ids)
+        self.add_message_to_created_invoice(
+            move_ids, sale_order, body_msg=msg_create_invoice)
 
         sale_order.message_post(body=msg_create_invoice)
         return {'type': 'ir.actions.client', 'tag': 'soft_reload'}
