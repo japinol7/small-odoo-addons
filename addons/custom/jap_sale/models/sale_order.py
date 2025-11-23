@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import logging
+from time import sleep
 
-from odoo import models
+from odoo import api, models
 from odoo.exceptions import UserError
 from odoo.tools.safe_eval import safe_eval
 
@@ -61,3 +62,27 @@ class SaleOrder(models.Model):
             'default_date_order': self.date_order,
             })
         return res
+
+    @api.model
+    def jap_waste_some_time(self, time_to_waste: int) -> int:
+        """Waste some time by sleeping time_to_waste seconds.
+        Returns how many seconds we effectively wasted.
+        Currently, we set a max time to waste in the method body.
+        It is intended to be used to test remote JSON-RPC calls behavior.
+        """
+        log_prefix = f"{'-' * 10} "
+        _logger.info(f"{log_prefix}Start jap_waste_some_time")
+
+        max_time_to_waste = 30
+        if time_to_waste > max_time_to_waste:
+            _logger.info(f"{log_prefix}Too much time to waste: {time_to_waste}. "
+                         f"We will waste {max_time_to_waste} secs, instead.")
+            time_to_waste = max_time_to_waste
+
+        for i in range(1, time_to_waste + 1):
+            _logger.info(f"{log_prefix}Wasting your time: {i:2} / {time_to_waste:2}")
+            sleep(1)
+
+        _logger.info(f"{log_prefix}End jap_waste_some_time")
+
+        return time_to_waste
