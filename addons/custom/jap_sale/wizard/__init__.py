@@ -1,1 +1,2 @@
 from . import create_invoice_from_sel_sale_lines_wizard
+from . import sale_orders_same_partner_wizard

@@ -27,7 +27,7 @@ class SaleOrderLine(models.Model):
         new_order_line = self.copy({
             'jap_created_by_copy': True,
             'order_id': self.order_id.id,
-            'product_uom_qty': 1,
+            'product_uom_qty': 0,
             'price_unit': 0,
             })
 

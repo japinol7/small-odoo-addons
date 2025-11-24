@@ -148,8 +148,7 @@ class JapCreateInvoiceSelectedSaleLinesWizard(models.TransientModel):
 
         self = self.with_context(
             jap_sale_lines_selected_to_create_invoice=[x.id for x in lines])
-        orders = self.env['sale.order'].browse(self._context.get('active_ids', []))
-        sale_order = orders[0]
+        sale_order = self.sale_id
 
         _logger.info(f"{msg_prefix} Create invoice for order lines: "
                      f"{[(line.id, line.order_id.name) for line in lines]}")

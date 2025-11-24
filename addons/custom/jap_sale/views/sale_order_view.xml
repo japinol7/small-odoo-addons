@@ -1,16 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+<record id="action_jap_sale_orders_same_partner" model="ir.actions.server">
+    <field name="name">Jap Sale orders with the same customer Wizard</field>
+    <field name="model_id" ref="sale.model_sale_order"/>
+    <field name="binding_model_id" ref="sale.model_sale_order"/>
+    <field name="state">code</field>
+    <field name="code">
+        action = records.action_jap_sale_orders_same_partner()
+    </field>
+</record>
+
 <record id="view_order_form" model="ir.ui.view">
     <field name="name">sale.order.form.jap</field>
     <field name="model">sale.order</field>
     <field name="inherit_id" ref="sale.view_order_form"/>
     <field name="arch" type="xml">
         <button name="action_draft" position="after">
+            <!--Button Create Invoice From Lines-->
             <button name="action_jap_create_invoice_from_selected_lines" type="object"
                     string="Create Invoice From Lines"
                     icon="fa-list-ul"
                     invisible="state != 'sale'"
                     help="Create draft Invoice.">
+            </button>
+            <!--Button Sale orders with the same customer-->
+            <button name="%(action_jap_sale_orders_same_partner)d" type="action"
+                    class="oe_stat_button"
+                    string="Sale orders with the same customer"
+                    icon="fa-list-ul">
             </button>
         </button>
         <xpath expr="//field[@name='order_line']/list//field[@name='product_id']" position="before">

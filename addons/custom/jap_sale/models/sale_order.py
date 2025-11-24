@@ -63,6 +63,13 @@ class SaleOrder(models.Model):
             })
         return res
 
+    def action_jap_sale_orders_same_partner(self):
+        self.ensure_one()
+        return self.env['jap.sale.orders.same.partner.wizard']. \
+            create({
+                'partner_id': self.partner_id.id,
+            }).action_open()
+
     @api.model
     def jap_waste_some_time(self, time_to_waste: int) -> int:
         """Waste some time by sleeping time_to_waste seconds.

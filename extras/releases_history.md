@@ -5,8 +5,10 @@
 ### Features upgraded to Odoo 18
 
 * Add an addon to customize JAP addons version.
-    * jap_customize_version.
-
+  * jap_customize_version.
+* Improve addon jap_sale:
+  * When copying a line, set the qty to 0 instead of 1.
+  * Add wizard that displays a list of all sales orders associated <br /> with the customer of the current order
 * Some minor improvements.
 
 <br>

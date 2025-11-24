@@ -35,6 +35,11 @@
   * You can select which lines to invoice.
   * You can also add an Invoice note that will be added to the created invoice.
 
+* Display a list of all sales orders associated with the customer of the current order.
+    * You can see all the orders on this list. 
+    * But you can only open an order if you have the right permissions.
+<br />
+
 
 ### New icons in order lines
 
@@ -72,3 +77,10 @@ You can select which lines to add to the new invoice and add an internal note. <
 
 Invoice created with the Wizard 'Create Invoice from Selected Lines' <br /> <br />
 <img src="screenshots/screenshot5.png" width="980"> <br /> <br />
+
+Wizard that opens with the button 'Sale orders with the same customer' <br />
+It displays a list of all sales orders associated with the customer of the current order. <br />
+You can open a sale order from this wizard only if you have the right permissions.<br /> <br />
+<img src="screenshots/screenshot6.png" width="980"> <br /> <br />
+
+.

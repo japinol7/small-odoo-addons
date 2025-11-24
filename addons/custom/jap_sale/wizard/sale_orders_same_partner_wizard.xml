@@ -1,0 +1,33 @@
+<odoo>
+<record id="jap_sale_orders_same_partner_wizard_form" model="ir.ui.view">
+    <field name="name">jap.sale.orders.same.partner.wizard.form</field>
+    <field name="model">jap.sale.orders.same.partner.wizard</field>
+    <field name="arch" type="xml">
+        <form string="Sale orders with the same customer">
+            <p name="wizard_description"
+               style="color:rgb(88,88,107);font-size:12px;font-style:italic;margin-bottom:0px">
+                This wizard displays all sales orders associated with the customer of the current order.
+                <br/> <br/>
+            </p>
+            <field name="partner_id" readonly="1" options="{'no_open': True}"/>
+            <field name="line_ids" nolabel="1">
+                <list string="Orders" no_open="1" create="false" edit="false" delete="false">
+                    <field name="sale_id" invisible="1" column_invisible="1"/>
+                    <field name="sale_name"/>
+                    <field name="sale_state"/>
+                    <field name="sale_invoice_status"/>
+                    <field name="partner_name"/>
+                    <field name="company_name" string="Company"/>
+                    <!--Button Open this order-->
+                    <button name="action_open_selected_sale_order" type="object"
+                        string="Open this order" class="btn btn-primary btn-sm">
+                    </button>
+                </list>
+            </field>
+        <footer>
+            <button string="Close" class="btn-secondary" special="cancel"/>
+        </footer>
+        </form>
+    </field>
+</record>
+</odoo>
