@@ -9,8 +9,8 @@
 	author_nickname: japinol
 	author_gitHub: japinol7
 	author_twitter: @japinol
-	Python: 3.12
-	PostgreSQL v. tested: 17.4
+	Python: 3.13
+	PostgreSQL v. tested: 18.1
 
 
 ## Older versions
