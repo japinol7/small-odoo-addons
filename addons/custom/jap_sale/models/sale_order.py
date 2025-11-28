@@ -3,7 +3,7 @@ import logging
 from time import sleep
 
 from odoo import api, models
-from odoo.exceptions import UserError
+from odoo.exceptions import AccessError, UserError
 from odoo.tools.safe_eval import safe_eval
 
 
@@ -79,6 +79,11 @@ class SaleOrder(models.Model):
         """
         log_prefix = f"{'-' * 10} "
         _logger.info(f"{log_prefix}Start jap_waste_some_time")
+
+        if not self.env.context.get('ctx_jap_allow_waste_some_time'):
+            raise AccessError(
+                "You cannot execute the method 'jap_waste_some_time' "
+                "without the appropriate context key.")
 
         max_time_to_waste = 30
         if time_to_waste > max_time_to_waste:
