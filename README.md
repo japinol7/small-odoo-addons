@@ -71,16 +71,19 @@ A Sale or quotation will show a duplicate button for each line <br/>
 and an icon mark for a line created by duplication <br /> <br />
 <img src="screenshots/screenshot3.png" width="980"> <br /> <br />
 
-Wizard that opens with the button 'Create Invoice from Lines' <br />
+#### Wizard that opens with the button 'Create Invoice from Lines' <br />
 You can select which lines to add to the new invoice and add an internal note. <br /> <br />
 <img src="screenshots/screenshot4.png" width="980"> <br /> <br />
 
-Invoice created with the Wizard 'Create Invoice from Selected Lines' <br /> <br />
+#### Invoice created with the Wizard 'Create Invoice from Selected Lines' <br />
 <img src="screenshots/screenshot5.png" width="980"> <br /> <br />
 
-Wizard that opens with the button 'Sale orders with the same customer' <br />
+#### Wizard that opens with the button 'Sale orders with the same customer' <br />
 It displays a list of all sales orders associated with the customer of the current order. <br />
-You can open a sale order from this wizard only if you have the right permissions.<br /> <br />
+You can open a sale order from this wizard only if you have the right permissions.<br />
+You can also open a second wizard to display the current sale order lines <br />
+to help you choose the right order.<br /> <br />
 <img src="screenshots/screenshot6.png" width="980"> <br /> <br />
+<img src="screenshots/screenshot7.png" width="980"> <br /> <br />
 
 .

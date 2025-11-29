@@ -67,7 +67,7 @@ class JapSaleOrdersSamePartnerWizardLine(models.TransientModel):
     _description = "Line of Sale orders with the same customer"
 
     wizard_id = fields.Many2one(
-        'jap.sale.orders.same.partner.wizard', 
+        'jap.sale.orders.same.partner.wizard',
         required=True, ondelete='cascade')
     sale_id = fields.Many2one(
         'sale.order',
@@ -89,3 +89,10 @@ class JapSaleOrdersSamePartnerWizardLine(models.TransientModel):
             'views': [(False, 'form')],
             'target': 'current',
             }
+
+    def action_open_display_sale_order_lines(self):
+        self.ensure_one()
+        return self.env['jap.sale.orders.same.partner.order.lines.wizard'].create({
+            'sale_id': self.sale_id.id,
+            'partner_name': self.partner_name,
+            }).action_open()

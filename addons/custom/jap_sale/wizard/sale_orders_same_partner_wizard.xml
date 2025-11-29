@@ -22,6 +22,10 @@
                     <button name="action_open_selected_sale_order" type="object"
                         string="Open this order" class="btn btn-primary btn-sm">
                     </button>
+                    <!--Button Open display the lines of the current order-->
+                    <button name="action_open_display_sale_order_lines" type="object"
+                        string="Display lines of this order" class="btn btn-primary btn-sm">
+                    </button>
                 </list>
             </field>
         <footer>

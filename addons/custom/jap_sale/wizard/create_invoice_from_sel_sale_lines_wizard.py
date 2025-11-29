@@ -51,7 +51,7 @@ class JapCreateInvoiceSelectedSaleLinesWizard(models.TransientModel):
 
     sale_id = fields.Many2one(
         'sale.order',
-        string='Sale', readonly=True,
+        string='Sale_', readonly=True,
         default=_default_sale_id)
     sale_name = fields.Char(
         string='Sale', readonly=True)

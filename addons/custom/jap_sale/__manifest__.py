@@ -21,6 +21,7 @@
         'views/account_move_view.xml',
         'wizard/create_invoice_from_sel_sale_lines_wizard.xml',
         'wizard/sale_orders_same_partner_wizard.xml',
+        'wizard/sale_orders_same_partner_order_lines_wizard.xml',
     ],
     'demo': [],
     'images': [],

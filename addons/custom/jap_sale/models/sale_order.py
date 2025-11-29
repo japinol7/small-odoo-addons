@@ -77,13 +77,18 @@ class SaleOrder(models.Model):
         Currently, we set a max time to waste in the method body.
         It is intended to be used to test remote JSON-RPC calls behavior.
         """
-        log_prefix = f"{'-' * 10} "
-        _logger.info(f"{log_prefix}Start jap_waste_some_time")
-
         if not self.env.context.get('ctx_jap_allow_waste_some_time'):
             raise AccessError(
                 "You cannot execute the method 'jap_waste_some_time' "
                 "without the appropriate context key.")
+
+        log_prefix = f"{'-' * 10} "
+        _logger.info(f"{log_prefix}Start jap_waste_some_time")
+        log_end_msg = f"{log_prefix}End jap_waste_some_time. Time wasted: %s seconds."
+
+        if time_to_waste <= 0:
+            _logger.info(log_end_msg, 0)
+            return 0
 
         max_time_to_waste = 30
         if time_to_waste > max_time_to_waste:
@@ -92,9 +97,11 @@ class SaleOrder(models.Model):
             time_to_waste = max_time_to_waste
 
         for i in range(1, time_to_waste + 1):
-            _logger.info(f"{log_prefix}Wasting your time: {i:2} / {time_to_waste:2}")
+            _logger.info(
+                f"{log_prefix}Wasting some time, in seconds: "
+                f"{i:2} / {time_to_waste:2}")
             sleep(1)
 
-        _logger.info(f"{log_prefix}End jap_waste_some_time")
+        _logger.info(log_end_msg, time_to_waste)
 
         return time_to_waste
