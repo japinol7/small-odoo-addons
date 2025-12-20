@@ -3,7 +3,7 @@
 {
     'name': 'JAP Customize Version',
     'summary': "Customize release version",
-    'version': '18.0.1.0.0',
+    'version': '19.0.1.0.0',
     'description': "Customize release version",
     'author': 'japinol',
     'company': 'japinol',
@@ -13,6 +13,7 @@
         'jap_addons_config',
     ],
     'data': [
+        'security/ir.model.access.csv',
         'views/jap_addons_config_view.xml',
     ],
     'demo': [],

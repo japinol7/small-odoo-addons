@@ -3,7 +3,7 @@
 {
     'name': 'JAP Sales',
     'summary': "Improvements to Sales Orders",
-    'version': '18.0.1.0.0',
+    'version': '19.0.1.0.0',
     'description': "Allows creating invoices from selected sale order lines",
     'author': 'japinol',
     'company': 'japinol',

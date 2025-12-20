@@ -1,5 +1,34 @@
 # Release History
 
+## v19.1.0.0
+
+### Features upgraded to Odoo 19
+
+* Addons upgraded:
+  * jap_addons_config
+  * jap_custom_security
+  * jap_customize_version
+  * jap_sale
+
+* Duplicate a sale line with the duplication button <br /> on the right side of the line.
+  * Only visible for users with the group: Sale Duplicate Lines.
+  * Users with the group 'Role Sales Squad' inherit this group.
+
+* Duplicated lines will be marked with this icon on the most important views: <br />
+  * One letter A within a solid circle.
+
+* Create an Invoice from Selected Sale Lines.
+  * Only visible for users with the group: Role Sales Squad.
+  * You can select which lines to invoice.
+  * You can also add an Invoice note that will be added to the created invoice.
+
+* Open an order of the same customer using a wizard that displays a list of all sales <br /> orders associated with the customer of the current order.
+
+* Customize the JAP addons version using the addon:
+  * jap_customize_version.
+
+<br>
+
 ## v18.1.0.0
 
 ### Features upgraded to Odoo 18

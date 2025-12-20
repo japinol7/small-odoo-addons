@@ -12,9 +12,9 @@ class JapAddonsConfig(models.Model):
     description = fields.Char(copy=False)
     note = fields.Text(string="Notes", copy=False)
 
-    _sql_constraints = [
-        ('name', 'unique(name)', 'Name must be unique!'),
-        ]
+    _uniq_name = models.Constraint(
+        'unique (name)', 'Name must be unique!',
+        )
 
     def copy(self, default=None):
         raise UserError('Not allowed: copy a Jap Addons Configuration.')
