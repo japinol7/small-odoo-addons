@@ -1,10 +1,10 @@
 ## Odoo addons Examples. 
 
 	Small addons examples of Python programming with the Odoo ERP framework.
-    You will need to install Odoo 18.0 to use these examples.
+    You will need to install Odoo 19.0 to use these examples.
 
-	version: 18.0.1.0.0
-    release: v18.1.0.0
+	version: 19.0.1.0.0
+    release: v19.1.0.0
 	author: Joan A. Pinol
 	author_nickname: japinol
 	author_gitHub: japinol7
@@ -15,6 +15,7 @@
 
 ## Older versions
 
+    You can find these addons for Odoo 18.0 in the release: v18.1.0.0
     You can find these addons for Odoo 17.0 in the release: v17.0.1.0
     You can find these addons for Odoo 16.0 in the release: v16.0.1.0
 
@@ -62,28 +63,33 @@ Note: The following addon modules will be automatically installed:
 * JAP Security
 <br />
 
-<img src="screenshots/screenshot1.png" width="980"> <br /> <br />
+<img src="screenshots/screenshot01.png" width="980"> <br /> <br />
+
+You can check the JAP addons version and configuration <br /> <br />
+<img src="screenshots/screenshot02.png" width="980"> <br /> <br />
+<img src="screenshots/screenshot03.png" width="980"> <br /> <br />
+<img src="screenshots/screenshot04.png" width="980"> <br /> <br />
 
 Activate the 'Role Sales Squad' role for the chosen users <br /> <br />
-<img src="screenshots/screenshot2.png" width="980"> <br /> <br />
+<img src="screenshots/screenshot05.png" width="980"> <br /> <br />
 
 A Sale or quotation will show a duplicate button for each line <br/>
 and an icon mark for a line created by duplication <br /> <br />
-<img src="screenshots/screenshot3.png" width="980"> <br /> <br />
+<img src="screenshots/screenshot06.png" width="980"> <br /> <br />
 
 #### Wizard that opens with the button 'Create Invoice from Lines' <br />
 You can select which lines to add to the new invoice and add an internal note. <br /> <br />
-<img src="screenshots/screenshot4.png" width="980"> <br /> <br />
+<img src="screenshots/screenshot07.png" width="980"> <br /> <br />
 
 #### Invoice created with the Wizard 'Create Invoice from Selected Lines' <br />
-<img src="screenshots/screenshot5.png" width="980"> <br /> <br />
+<img src="screenshots/screenshot08.png" width="980"> <br /> <br />
 
 #### Wizard that opens with the button 'Sale orders with the same customer' <br />
 It displays a list of all sales orders associated with the customer of the current order. <br />
 You can open a sale order from this wizard only if you have the right permissions.<br />
 You can also open a second wizard to display the current sale order lines <br />
 to help you choose the right order.<br /> <br />
-<img src="screenshots/screenshot6.png" width="980"> <br /> <br />
-<img src="screenshots/screenshot7.png" width="980"> <br /> <br />
+<img src="screenshots/screenshot09.png" width="980"> <br /> <br />
+<img src="screenshots/screenshot10.png" width="980"> <br /> <br />
 
 .
