@@ -70,6 +70,10 @@ class SaleOrder(models.Model):
                 'partner_id': self.partner_id.id,
             }).action_open()
 
+    def jap_log_sale_order_names(self):
+        for order in self:
+            _logger.info(f"---- Sale order name: {order.name}")
+
     @api.model
     def jap_waste_some_time(self, time_to_waste: int) -> int:
         """Waste some time by sleeping time_to_waste seconds.

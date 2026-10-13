@@ -3,7 +3,7 @@
 {
     'name': 'JAP Security',
     'summary': "Customizes security and access permissions",
-    'version': '19.0.1.0.0',
+    'version': '19.0.1.1.0',
     'description': "Customizes security and access permissions",
     'author': 'japinol',
     'company': 'japinol',
