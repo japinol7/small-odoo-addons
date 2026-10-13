@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<record id="jap_simple_bulk_server_job_list_view" model="ir.ui.view">
+    <field name="name">jap.simple.bulk.server.job.list</field>
+    <field name="model">jap.simple.bulk.server.job</field>
+    <field name="arch" type="xml">
+        <list string="JAP Simple Bulk Server Jobs" create="false" delete="false">
+            <header>
+                <!--Button 'Simple Bulk Server Jobs Wizard'-->
+                <button name="action_jap_simple_bulk_server_job" type="object"
+                        string="Create Bulk Job"
+                        class="btn-primary"
+                        display="always"
+                        icon="fa-rocket">
+                </button>
+            </header>
+            <field name="max_items_to_process" readonly="1"/>
+            <field name="processed_items_count" readonly="1"/>
+            <field name="last_item_id" readonly="1"/>
+            <field name="target_recordset_model" readonly="1"/>
+            <field name="state" readonly="0"/>
+            <field name="target_recordset_model" readonly="1"/>
+            <field name="target_domain" readonly="1"/>
+            <field name="target_process_items_func" readonly="1"/>
+            <field name="active" column_invisible="1"/>
+        </list>
+    </field>
+</record>
+
+<record id="jap_simple_bulk_server_job_form_view" model="ir.ui.view">
+    <field name="name">jap.simple.bulk.server.job.form</field>
+    <field name="model">jap.simple.bulk.server.job</field>
+    <field name="arch" type="xml">
+        <form string="JAP Simple Bulk Server Jobs" create="false" delete="false">
+            <header>
+                <!--Button 'Simple Bulk Server Jobs Wizard'-->
+                <button name="action_jap_simple_bulk_server_job" type="object"
+                        string="Create Bulk Job"
+                        class="btn-primary"
+                        display="always"
+                        icon="fa-rocket">
+                </button>
+                <!--Button 'Set as Cancelled'-->
+                <button name="action_cancel"
+                    string="Set as Cancelled" type="object"
+                    class="oe_highlight"
+                    invisible="state in ('done', 'cancel', 'failed')"/>
+                <!--Button 'Set as Running'-->
+                <button name="action_running"
+                    string="Set as Running" type="object"
+                    class="oe_highlight"
+                    invisible="state in ('done', 'pending', 'running')"/>
+                <field name="state" widget="statusbar"
+                       statusbar_visible="pending, running, failed, done"
+                       nolabel="1" readonly="1" />
+            </header>
+            <sheet>
+            <group col="2">
+                <group name="top_left">
+                    <field name="max_items_to_process" readonly="1"/>
+                    <field name="processed_items_count" readonly="1"/>
+                    <field name="last_item_id" readonly="1"/>
+                    <field name="target_recordset_model" readonly="1"/>
+                    <field name="active" invisible="1"/>
+                </group>
+                <group name="top_right">
+                    <field name="target_recordset_model" readonly="1"/>
+                    <field name="target_domain" readonly="1"/>
+                    <field name="target_process_items_func" readonly="1"/>
+                    <separator/>
+                </group>
+            </group>
+            <group col="2">
+                <field name="error_message" readonly="1"/>
+            </group>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+<record id="jap_simple_bulk_server_job_search_view" model="ir.ui.view">
+    <field name="name">jap.simple.bulk.server.job.search.view</field>
+    <field name="model">jap.simple.bulk.server.job</field>
+    <field name="arch" type="xml">
+          <search>
+              <field name="target_recordset_model"/>
+              <field name="target_domain"/>
+              <field name="target_process_items_func"/>
+
+              <filter name="bulk_jobs_to_check"
+                      string="To Check"
+                      domain="[('state','in',('pending', 'running', 'failed'))]"/>
+              <filter name="bulk_jobs_pending"
+                      string="Pending"
+                      domain="[('state','=','pending')]"/>
+              <filter name="bulk_jobs_running"
+                      string="Running"
+                      domain="[('state','=','running')]"/>
+              <filter name="bulk_jobs_done"
+                      string="Done"
+                      domain="[('state','=','done')]"/>
+              <separator/>
+              <filter name="bulk_jobs_failed"
+                      string="Failed"
+                      domain="[('state','=','failed')]"/>
+              <filter name="bulk_jobs_cancel"
+                      string="Cancelled"
+                      domain="[('state','=','cancel')]"/>
+              <separator/>
+              <filter name="filter_inactive"
+                      string="Inactive"
+                      domain="[('active','=',False)]"/>
+              <filter name="filter_active"
+                      string="Active"
+                      domain="[('active','=',True)]"/>
+          </search>
+    </field>
+</record>
+</odoo>

@@ -1,5 +1,32 @@
 # Release History
 
+## v19.1.1.0
+
+### Features added and upgraded for Odoo 19.0
+
+* New Addons:
+  * jap_simple_bulk_server_job
+
+* Addons Improved:
+  * jap_addons_config
+  * jap_custom_security
+  * jap_customize_version
+  * jap_sale
+
+
+#### About the new addon:
+
+'JAP Simple Bulk Server Job' is a Technical addon intended to be used by System Administrators.
+
+This addon allows creating special jobs able to process several records in bulk; 
+a batch of N items per cron execution. 
+
+It includes a Wizard to create jobs, views to manage them and a cron to execute the jobs.
+* All the menus and views can be accessed from this menu:
+Settings -- Technical -- Jap. Addons
+
+<br>
+
 ## v19.1.0.0
 
 ### Features upgraded to Odoo 19

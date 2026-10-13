@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<record id="jap_addons_config_form_view" model="ir.ui.view">
+    <field name="name">jap.addons.config.form.jap</field>
+    <field name="model">jap.addons.config</field>
+    <field name="inherit_id" ref="jap_addons_config.jap_addons_config_form_view"/>
+    <field name="arch" type="xml">
+        <xpath expr="//page[@name='notes']" position="after">
+            <page string="Addon Process in Bulk" name="security_config">
+                <separator string="Addon Process several records in bulk" colspan="4" style="color:#11111e"/>
+                <group name="group_process_bulk_1">
+                    <field name="bulk_server_job_batch_size"/>
+                </group>
+            </page>
+        </xpath>
+    </field>
+</record>
+</odoo>

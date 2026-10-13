@@ -1,0 +1,47 @@
+<odoo>
+<record id="jap_simple_bulk_server_job_wizard_view" model="ir.ui.view">
+    <field name="name">jap.simple.bulk.server.job.wizard.form</field>
+    <field name="model">jap.simple.bulk.server.job.wizard</field>
+    <field name="arch" type="xml">
+        <form string="Create Job to Process Several Records in Bulk">
+            <p name="wizard_description" style="color:gray;font-style:italic;font-size:12px;margin-bottom:0px">
+                This wizard allows creating a job to process several records in bulk in the background.
+                <br/>
+                Note that current target fields will be saved on execution and recovered the next time
+                you open this wizard.
+            </p>
+            <br/>
+
+            <group name="container_group_1" col="6">
+            </group>
+
+            <group name="container_group_2" col="8">
+                <group name="left_group_2" string="Enter max number of records to process" colspan="4">
+                    <field name="max_items_to_process" required="1" readonly="0"/>
+                    <field name="target_recordset_model" required="1" readonly="0"
+                           placeholder="sale.order"/>
+                    <field name="target_domain" required="1" readonly="0"
+                           placeholder="[('state', '=', 'draft')]"/>
+                    <field name="target_process_items_func" required="1" readonly="0"
+                           placeholder="jap_log_sale_order_names"/>
+                </group>
+            </group>
+
+            <footer>
+                <button string="Create Job to Process Several Records in Bulk" name="process_items_bulk" type="object"
+                        default_focus="1" class="btn-primary"
+                        confirm="Are you sure you want to create a job to process several records in bulk?"/>
+                <button string="Cancel" class="btn-default" special="cancel"/>
+            </footer>
+        </form>
+    </field>
+</record>
+
+<record id="action_jap_simple_bulk_server_job_wizard_view" model="ir.actions.act_window">
+    <field name="name">Create Job to Process Several Records in Bulk</field>
+    <field name="res_model">jap.simple.bulk.server.job.wizard</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+    <field name="view_id" ref="jap_simple_bulk_server_job_wizard_view"/>
+</record>
+</odoo>
