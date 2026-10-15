@@ -71,8 +71,37 @@ class SaleOrder(models.Model):
             }).action_open()
 
     def jap_log_sale_order_names(self):
+        """Is intended to be used for testing multi-record features."""
         for order in self:
             _logger.info(f"---- Sale order name: {order.name}")
+
+    def jap_log_sale_order_names_with_args(
+            self, text, repeat_text, post_msg_on_record=False
+        ):
+        """Is intended to be used for testing multi-record features."""
+        repeat_n = min(5, repeat_text or 0)
+        repeat_n = max(1, repeat_n or 0)
+
+        if repeat_text < 1 or repeat_text > 5:
+            _logger.info("jap_log_sale_order_names_with_args: "
+                         "Adjusted repeat to a number between 1 and 5. "
+                         f"Reason: Invalid value for 'repeat_text': {repeat_text}")
+
+        context_value_to_log = self.env.context.get('ctx_jap_log_this_context_value')
+
+        for order in self:
+            msg = f"---- Sale order name: {order.name}. " \
+                  f"{'Input text: ' + (text + (' ' if repeat_n else '')) 
+                     * repeat_n if text else ''}"
+
+            _logger.info(msg)
+
+            if post_msg_on_record:
+                order.message_post(body=msg)
+
+            if context_value_to_log:
+                _logger.info("-------- Asked to log this context value "
+                             f"for order {order.name}: {context_value_to_log}")
 
     @api.model
     def jap_waste_some_time(self, time_to_waste: int) -> int:

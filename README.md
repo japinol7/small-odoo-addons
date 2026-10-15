@@ -3,8 +3,8 @@
 	Small addons examples of Python programming with the Odoo ERP framework.
     You will need to install Odoo 19.0 to use these examples.
 
-	version: 19.0.1.1.0
-    release: v19.1.1.0
+	version: 19.0.1.1.1
+    release: v19.1.1.1
 	author: Joan A. Pinol
 	author_nickname: japinol
 	author_gitHub: japinol7
@@ -114,8 +114,10 @@ Settings -- Technical -- Jap. Addons
 <img src="screenshots/screenshot11.png" width="980"> <br /> <br />
 <img src="screenshots/screenshot12.png" width="800"> <br /> <br />
 <img src="screenshots/screenshot13.png" width="980"> <br /> <br />
-<img src="screenshots/screenshot14.png" width="980"> <br /> <br />
+<img src="screenshots/screenshot14.png" width="680"> <br /> <br />
 <img src="screenshots/screenshot15.png" width="980"> <br /> <br />
 <img src="screenshots/screenshot16.png" width="800"> <br /> <br />
+<img src="screenshots/screenshot17.png" width="800"> <br /> <br />
+<img src="screenshots/screenshot18.png" width="800"> <br /> <br />
 
-.
+..

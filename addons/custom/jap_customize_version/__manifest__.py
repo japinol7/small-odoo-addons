@@ -3,7 +3,7 @@
 {
     'name': 'JAP Customize Version',
     'summary': "Customize release version",
-    'version': '19.0.1.1.0',
+    'version': '19.0.1.1.1',
     'description': "Customize release version",
     'author': 'japinol',
     'company': 'japinol',
