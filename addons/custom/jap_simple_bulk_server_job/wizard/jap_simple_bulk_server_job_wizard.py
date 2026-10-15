@@ -39,7 +39,6 @@ class JapSimpleBulkServerJobWizard(models.TransientModel):
         string="Do not save values", default=False,
         help="If checked, the fields changed will not be saved for later recovery.")
 
-
     @api.model
     def default_get(self, fields_list):
         res = super().default_get(fields_list)

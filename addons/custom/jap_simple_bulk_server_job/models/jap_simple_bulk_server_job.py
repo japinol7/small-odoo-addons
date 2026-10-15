@@ -163,7 +163,7 @@ class JapSimpleBulkServerJob(models.Model):
         """Runs one batch. Is intended to be executed by a cron."""
         self.ensure_one()
 
-        if self.state in ('done', 'paused', 'cancel', 'failed'):
+        if not self.state in ('pending', 'running'):
             return
 
         if not self.date_start:
