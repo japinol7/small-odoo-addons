@@ -110,6 +110,7 @@ class JapSimpleBulkServerJob(models.Model):
 
     def action_done(self):
         self.state = 'done'
+
         if not self.date_done:
             self.date_done = fields.Datetime.now()
 
