@@ -19,15 +19,26 @@ class JapSimpleBulkServerJobWizard(models.TransientModel):
         string='Target Recordset model', required=True)
     target_domain = fields.Char(
         string='Target domain', required=True)
+    target_context = fields.Char(
+        string='Target context to add to the target recordset',
+        help="Target context to add to the target recordset")
     target_process_items_func = fields.Char(
         string='Target callable to process items', required=True,
         help="The target callable must be a regular recordset method. "
-             "If you need to call an @api.model method, you can wrap it "
-             "in a regular recordset method. "
              "Warning: retrying a failed job by setting its state back "
              "to 'running' relies on the target method not manually "
              "committing database changes. Manual commits can prevent "
              "the failed batch from being fully rolled back.")
+    target_process_func_args = fields.Char(
+        string='Target args for the callable func',
+        help="Positional arguments to pass to the target function method.")
+    target_process_func_kwargs = fields.Char(
+        string='Target kwargs for the callable func',
+        help="Keyword arguments to pass to the target function method.")
+    is_do_not_save_values = fields.Boolean(
+        string="Do not save values", default=False,
+        help="If checked, the fields changed will not be saved for later recovery.")
+
 
     @api.model
     def default_get(self, fields_list):
@@ -37,7 +48,10 @@ class JapSimpleBulkServerJobWizard(models.TransientModel):
         config_env = self.env.ref('jap_addons_config.jap_addons_config_main')
         res['target_recordset_model'] = config_env.bulk_job_target_recordset_model
         res['target_domain'] = config_env.bulk_job_target_domain
+        res['target_context'] = config_env.bulk_job_target_context
         res['target_process_items_func'] = config_env.bulk_job_target_process_items_func
+        res['target_process_func_args'] = config_env.bulk_job_target_process_func_args
+        res['target_process_func_kwargs'] = config_env.bulk_job_target_process_func_kwargs
 
         return res
 
@@ -56,24 +70,31 @@ class JapSimpleBulkServerJobWizard(models.TransientModel):
         config_env = self.env.ref('jap_addons_config.jap_addons_config_main')
         config_env.bulk_job_target_recordset_model = self.target_recordset_model
         config_env.bulk_job_target_domain = self.target_domain
+        config_env.bulk_job_target_context = self.target_context
         config_env.bulk_job_target_process_items_func = self.target_process_items_func
+        config_env.bulk_job_target_process_func_args = self.target_process_func_args
+        config_env.bulk_job_target_process_func_kwargs = self.target_process_func_kwargs
 
     def process_items_bulk(self):
         self.ensure_one()
 
-        self._save_target_fields()
+        if not self.is_do_not_save_values:
+            self._save_target_fields()
 
         if self.env['jap.simple.bulk.server.job'] \
                 ._get_current_items_bulk_processing_job():
             raise UserError(
                 "Cannot create a new bulk process job "
-                "because another job is already active.")
+                "because another job is already 'pending' or 'running'.")
 
         job = self.env['jap.simple.bulk.server.job'].create({
             'max_items_to_process': self.max_items_to_process,
             'target_recordset_model': self.target_recordset_model,
             'target_domain': self.target_domain,
+            'target_context': self.target_context,
             'target_process_items_func': self.target_process_items_func,
+            'target_process_func_args': self.target_process_func_args,
+            'target_process_func_kwargs': self.target_process_func_kwargs,
             })
         cron = self.env.ref(
             'jap_simple_bulk_server_job.ir_cron_jap_simple_bulk_server_job')

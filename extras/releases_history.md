@@ -1,5 +1,17 @@
 # Release History
 
+## v19.1.1.1
+
+### Features upgraded for Odoo 19.0
+
+* Several improvements to this addon:
+  * jap_simple_bulk_server_job
+
+* Minor improvements to this addon:
+  * jap_sale
+
+<br>
+
 ## v19.1.1.0
 
 ### Features added and upgraded for Odoo 19.0

@@ -3,7 +3,7 @@
     <data noupdate="1">
         <record model="ir.cron" id="ir_cron_jap_simple_bulk_server_job">
             <field name="name">JAP Simple Bulk Server Job</field>
-            <field name="interval_number">5</field>
+            <field name="interval_number">15</field>
             <field name="interval_type">minutes</field>
             <field name="state">code</field>
             <field name="model_id" ref="jap_simple_bulk_server_job.model_jap_simple_bulk_server_job"/>

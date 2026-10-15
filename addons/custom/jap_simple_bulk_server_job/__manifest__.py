@@ -3,7 +3,7 @@
 {
     'name': 'JAP Simple Bulk Server Job',
     'summary': "JAP Simple Bulk Server Job",
-    'version': '19.0.1.1.0',
+    'version': '19.0.1.1.1',
     'description': """
 JAP Simple Bulk Server Job
 ==========================

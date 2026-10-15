@@ -13,17 +13,24 @@
             <br/>
 
             <group name="container_group_1" col="6">
+                <field name="is_do_not_save_values"/>
             </group>
 
             <group name="container_group_2" col="8">
-                <group name="left_group_2" string="Enter max number of records to process" colspan="4">
+                <group name="left_group_2" string="Enter max number of records to process" colspan="8">
                     <field name="max_items_to_process" required="1" readonly="0"/>
                     <field name="target_recordset_model" required="1" readonly="0"
                            placeholder="sale.order"/>
                     <field name="target_domain" required="1" readonly="0"
                            placeholder="[('state', '=', 'draft')]"/>
+                    <field name="target_context" required="0" readonly="0"
+                           placeholder="{'ctx_jap_log_this_context_value': 'Hi! This is the context value asked to log'}"/>
                     <field name="target_process_items_func" required="1" readonly="0"
                            placeholder="jap_log_sale_order_names"/>
+                    <field name="target_process_func_args" required="0" readonly="0"
+                           placeholder="('Hello world', 2)"/>
+                    <field name="target_process_func_kwargs" required="0" readonly="0"
+                           placeholder="{'text': 'Hello world', 'repeat_text': 2, 'post_msg_on_record': True}"/>
                 </group>
             </group>
 

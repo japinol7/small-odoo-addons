@@ -20,6 +20,7 @@ class JapSimpleBulkServerJob(models.Model):
         ('pending', 'Pending'),
         ('running', 'Running'),
         ('done', 'Done'),
+        ('paused', 'Paused'),
         ('cancel', 'Cancelled'),
         ('failed', 'Failed'),
         ],
@@ -36,15 +37,28 @@ class JapSimpleBulkServerJob(models.Model):
         string='Target Recordset model', required=True)
     target_domain = fields.Char(
         string='Target domain', required=True)
+    target_context = fields.Char(
+        string='Target context to add to the target recordset',
+        help="Target context to add to the target recordset")
     target_process_items_func = fields.Char(
         string='Target callable to process items', required=True,
         help="The target callable must be a regular recordset method. "
-             "If you need to call an @api.model method, you can wrap it "
-             "in a regular recordset method. "
              "Warning: retrying a failed job by setting its state back "
              "to 'running' relies on the target method not manually "
              "committing database changes. Manual commits can prevent "
              "the failed batch from being fully rolled back.")
+    target_process_func_args = fields.Char(
+        string='Target args for the callable func',
+        help="Positional arguments to pass to the target function method.")
+    target_process_func_kwargs = fields.Char(
+        string='Target kwargs for the callable func',
+        help="Keyword arguments to pass to the target function method.")
+    date_start = fields.Datetime(
+        string='Date start', index=True, readonly=True, copy=False)
+    date_done = fields.Datetime(
+        string='Date done', index=True, readonly=True, copy=False)
+    date_last_failed = fields.Datetime(
+        string='Date last failed', index=True, readonly=True, copy=False)
     active = fields.Boolean(default=True)
 
     @api.constrains('max_items_to_process')
@@ -60,11 +74,21 @@ class JapSimpleBulkServerJob(models.Model):
 
     def action_cancel(self):
         if self.filtered(
-                lambda job: job.state in ('done', 'cancel', 'failed')):
-            raise UserError("User Error: Cannot cancel jobs in the following "
-                            "states: 'done', 'cancel', 'failed'.")
+                lambda job: job.state in ('done', 'cancel')):
+            raise UserError(
+                "User Error: Cannot cancel jobs in the following "
+                "states: 'done', 'cancel'.")
 
         return self.write({'state': 'cancel'})
+
+    def action_pause(self):
+        if self.filtered(
+                lambda job: job.state in ('done', 'paused', 'cancel', 'failed')):
+            raise UserError(
+                "User Error: Cannot set jobs state to 'running' if they are in "
+                "the following states: 'done', 'paused', 'cancel', 'failed'.")
+
+        return self.write({'state': 'paused'})
 
     def action_running(self):
         if self.filtered(
@@ -73,13 +97,32 @@ class JapSimpleBulkServerJob(models.Model):
                 "User Error: Cannot set jobs state to 'running' if they are in "
                 "the following states: 'done', 'pending', 'running'.")
 
+        if self._get_current_items_bulk_processing_job():
+            raise UserError(
+                "Cannot set this job as 'running' "
+                "because another job is already 'pending' or 'running'.")
+
         return self.write({'state': 'running'})
+
+    def action_failed(self):
+        self.state = 'failed'
+        self.date_last_failed = fields.Datetime.now()
+
+    def action_done(self):
+        self.state = 'done'
+        if not self.date_done:
+            self.date_done = fields.Datetime.now()
 
     def _process_job_batch_items(self, items):
         """Processes a batch and update its progress checkpoint.
         Transaction management is handled by _run_items_processing().
         """
         self.ensure_one()
+
+        # Add additional context if set
+        ctx_to_add = safe_eval(self.target_context or '{}')
+        if ctx_to_add:
+            items = items.with_context(ctx_to_add)
 
         process_items_func = getattr(
             items, self.target_process_items_func, None)
@@ -89,21 +132,25 @@ class JapSimpleBulkServerJob(models.Model):
                 _("Method '%s' not found or not callable on model '%s'.")
                 % (self.target_process_items_func, self.target_recordset_model))
 
+        # Get arguments to pass to the configured recordset method
+        func_args = safe_eval(self.target_process_func_args or '[]')
+        func_kwargs = safe_eval(self.target_process_func_kwargs or '{}')
+
         # Execute the configured recordset method
-        process_items_func()
+        process_items_func(*func_args, **func_kwargs)
 
         # Update progress only after successful business processing
         self.processed_items_count += len(items)
         self.last_item_id = items[-1].id
 
         if self.processed_items_count >= self.max_items_to_process:
-            self.state = 'done'
+            self.action_done()
 
     def _get_domain_for_items_to_process(self):
         error_msg = ''
         try:
             domain = [('id', '>', self.last_item_id)]
-            domain.extend(safe_eval(self.target_domain))
+            domain.extend(safe_eval(self.target_domain or '[]'))
         except Exception as e:
             _logger.exception(
                 "Error getting the domain for the items to process")
@@ -116,17 +163,20 @@ class JapSimpleBulkServerJob(models.Model):
         """Runs one batch. Is intended to be executed by a cron."""
         self.ensure_one()
 
-        if self.state in ('done', 'failed'):
+        if self.state in ('done', 'paused', 'cancel', 'failed'):
             return
 
+        if not self.date_start:
+            self.date_start = fields.Datetime.now()
+
         if not self.target_domain:
-            self.state = 'done'
+            self.action_done()
             return
 
         domain, error_msg = self._get_domain_for_items_to_process()
 
         if error_msg:
-            self.state = 'failed'
+            self.action_failed()
             self.error_message = _(
                 "Error getting the domain for items to process.\n%s"
                 ) % error_msg
@@ -135,7 +185,7 @@ class JapSimpleBulkServerJob(models.Model):
         remaining = self.max_items_to_process - self.processed_items_count
 
         if remaining <= 0:
-            self.state = 'done'
+            self.action_done()
             return
 
         try:
@@ -155,7 +205,7 @@ class JapSimpleBulkServerJob(models.Model):
                 order='id')
 
             if not items:
-                self.state = 'done'
+                self.action_done()
                 return
 
             _logger.info(
@@ -175,7 +225,7 @@ class JapSimpleBulkServerJob(models.Model):
             # The savepoint has rolled back the failed batch.
             # Record the failure outside the savepoint so it can
             # be committed by Odoo with the outer cron transaction.
-            self.state = 'failed'
+            self.action_failed()
             self.error_message = _("Error processing items.\n%s") % str(e)
 
     @api.model
@@ -186,7 +236,6 @@ class JapSimpleBulkServerJob(models.Model):
         """
         return self.search([
             ('state', 'in', ['pending', 'running']),
-            ('active', '=', True),
             ], limit=1, order='id')
 
     @api.model

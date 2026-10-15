@@ -7,14 +7,6 @@
     <field name="target">new</field>
 </record>
 
-<menuitem id="menu_jap_simple_bulk_server_job_wizard"
-          name="Process Several Records in Bulk"
-          action="action_jap_simple_bulk_server_job_wizard"
-          parent="jap_addons_config.menu_jap_addons_config_main"
-          groups="base.group_system"
-          sequence="152"
-/>
-
 <record id="action_jap_simple_bulk_server_job" model="ir.actions.act_window">
     <field name="name">Simple Bulk Jobs</field>
     <field name="res_model">jap.simple.bulk.server.job</field>

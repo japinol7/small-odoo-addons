@@ -14,14 +14,15 @@
                         icon="fa-rocket">
                 </button>
             </header>
+            <field name="date_start" readonly="1"/>
             <field name="max_items_to_process" readonly="1"/>
             <field name="processed_items_count" readonly="1"/>
             <field name="last_item_id" readonly="1"/>
             <field name="target_recordset_model" readonly="1"/>
             <field name="state" readonly="0"/>
             <field name="target_recordset_model" readonly="1"/>
-            <field name="target_domain" readonly="1"/>
-            <field name="target_process_items_func" readonly="1"/>
+            <field name="target_domain" readonly="1" width="260px"/>
+            <field name="target_process_items_func" readonly="1" width="260px"/>
             <field name="active" column_invisible="1"/>
         </list>
     </field>
@@ -40,36 +41,51 @@
                         display="always"
                         icon="fa-rocket">
                 </button>
-                <!--Button 'Set as Cancelled'-->
-                <button name="action_cancel"
-                    string="Set as Cancelled" type="object"
+                <!--Button 'Set as Paused'-->
+                <button name="action_pause"
+                    string="Set as Paused" type="object"
                     class="oe_highlight"
-                    invisible="state in ('done', 'cancel', 'failed')"/>
+                    confirm="Are you sure you want to pause this job?"
+                    invisible="state in ('done', 'paused', 'cancel', 'failed')"/>
                 <!--Button 'Set as Running'-->
                 <button name="action_running"
                     string="Set as Running" type="object"
                     class="oe_highlight"
+                    confirm="Are you sure you want to set this job to 'running'?"
                     invisible="state in ('done', 'pending', 'running')"/>
+                <!--Button 'Set as Cancelled'-->
+                <button name="action_cancel"
+                    string="Set as Cancelled" type="object"
+                    class="oe_highlight"
+                    confirm="Are you sure you want to cancel this job?"
+                    invisible="state in ('done', 'cancel')"/>
                 <field name="state" widget="statusbar"
-                       statusbar_visible="pending, running, failed, done"
+                       statusbar_visible="pending, running, done"
                        nolabel="1" readonly="1" />
             </header>
             <sheet>
-            <group col="2">
-                <group name="top_left">
+            <group col="12">
+                <group name="top_left" colspan="4">
                     <field name="max_items_to_process" readonly="1"/>
                     <field name="processed_items_count" readonly="1"/>
                     <field name="last_item_id" readonly="1"/>
                     <field name="target_recordset_model" readonly="1"/>
+                    <field name="date_start" readonly="1"/>
+                    <field name="date_done" readonly="1"/>
+                    <field name="date_last_failed" readonly="1"/>
                     <field name="active" invisible="1"/>
                 </group>
-                <group name="top_right">
+                <group name="top_right" colspan="8">
                     <field name="target_recordset_model" readonly="1"/>
                     <field name="target_domain" readonly="1"/>
+                    <field name="target_context" readonly="1"/>
                     <field name="target_process_items_func" readonly="1"/>
-                    <separator/>
+                    <field name="target_process_func_args" readonly="1"/>
+                    <field name="target_process_func_kwargs" readonly="1"/>
                 </group>
             </group>
+
+            <separator/>
             <group col="2">
                 <field name="error_message" readonly="1"/>
             </group>
@@ -89,13 +105,16 @@
 
               <filter name="bulk_jobs_to_check"
                       string="To Check"
-                      domain="[('state','in',('pending', 'running', 'failed'))]"/>
+                      domain="[('state','in',('pending', 'running', 'paused', 'failed'))]"/>
               <filter name="bulk_jobs_pending"
                       string="Pending"
                       domain="[('state','=','pending')]"/>
               <filter name="bulk_jobs_running"
                       string="Running"
                       domain="[('state','=','running')]"/>
+              <filter name="bulk_jobs_paused"
+                      string="Paused"
+                      domain="[('state','=','paused')]"/>
               <filter name="bulk_jobs_done"
                       string="Done"
                       domain="[('state','=','done')]"/>
